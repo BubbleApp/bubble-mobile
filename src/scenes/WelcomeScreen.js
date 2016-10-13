@@ -2,41 +2,74 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    Image
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-const WelcomeScreen = () => {
-    return (
-        <View style={styles.container}>
-            <Text
-                style={styles.welcome}
-                onPress={() => Actions.loginScreen()}
-            >
-                Scarlet Screen
-            </Text>
-            <Text
-                style={styles.welcome}
-            >
-                Open Modal
-            </Text>
-        </View>
-    );
+
+
+class WelcomeScreen extends Component {
+    state = { current_view: 'intro' }
+    render() {
+        return (
+            <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+                <View style={styles.container}>
+
+
+                    <View style={styles.image_box}>
+                        <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
+                    </View>
+                    <View style={styles.button_box}>
+                        <Text
+                            style={styles.text}
+                            onPress={() => Actions.loginScreen()}
+                        >
+                            Login
+                        </Text>
+                        <Text
+                            style={styles.text}
+                        >
+                            Signup
+                        </Text>
+                    </View>
+
+                </View>
+            </Image>
+
+        );
+    }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '##26C6DA',
+        backgroundColor: 'rgba(0,0,0,0)',
     },
-    welcome: {
+    background: {
+        flex:1,
+        width: undefined,
+        height: undefined,
+    },
+    logo: {
+        height: 320,
+        width: 207,
+    },
+    image_box:{
+        flex: 7,
+        justifyContent: 'space-around'
+    },
+    button_box:{
+        flex: 2,
+    },
+    text: {
         fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
         color: '#ffffff',
-    },
+    }
+
 });
 
 export default WelcomeScreen;
