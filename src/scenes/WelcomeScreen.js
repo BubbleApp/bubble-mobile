@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
     View
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 
 const WelcomeScreen = () => {
     return (
         <View style={styles.container}>
             <Text
                 style={styles.welcome}
-                onPress={() => Actions.gray()}
+                onPress={() => Actions.loginScreen()}
             >
                 Scarlet Screen
             </Text>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#bb0000',
+        backgroundColor: '##26C6DA',
     },
     welcome: {
         fontSize: 20,
