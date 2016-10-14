@@ -30,11 +30,8 @@ class WelcomeScreen extends Component {
         } else if (expanded_tab == 'login') {
             return (
                 <View>
-                    <View style={styles.button_box1}>
-                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Banana"/>
-                    </View>
                     <View style={styles.button_box2}>
-                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Phone"/>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('main')} title="Back"/>
                     </View>
                 </View>
             )
