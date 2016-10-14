@@ -2,31 +2,61 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    Image
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import LoginForm from '../components/LoginForm'
+import {Input} from './loginComponents/Input'
+
+var UserImage = '../images/UserIcon.png'
+
+
 
 const LoginScreen = () => {
     return (
-        <View style={styles.container}>
-            <LoginForm/>
-        </View>
+        <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+            <View style={styles.container}>
+                <View style={styles.image_box}>
+                    <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
+                </View>
+                <Input label='Email:'
+                       placeholder='user@gmail.com'
+                       autoCorrect={false}
+                       imgSrc= {UserImage}
+                       //value={this.state.email}
+                       /*onChangeText={email => this.setState({ email })}*/>
+                </Input>
+
+
+
+            </View>
+        </Image>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         marginTop:65,
-        backgroundColor: '#26C6DA',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0)',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        color: '#ffffff',
+    background: {
+        flex:1,
+        width: undefined,
+        height: undefined,
+    },
+    logo: {
+        height: 320,
+        width: 207,
+    },
+    image_box:{
+        flex: 5,
+        padding: 50,
+        justifyContent: 'space-around'
     },
 });
 

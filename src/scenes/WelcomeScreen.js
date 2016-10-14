@@ -5,6 +5,7 @@ import {
     View,
     Image
 } from 'react-native';
+import { Button } from '.././components/common/Button';
 import {Actions} from 'react-native-router-flux';
 
 
@@ -20,19 +21,25 @@ class WelcomeScreen extends Component {
                     <View style={styles.image_box}>
                         <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
                     </View>
-                    <View style={styles.button_box}>
-                        <Text
-                            style={styles.text}
-                            onPress={() => Actions.loginScreen()}
-                        >
-                            Login
-                        </Text>
-                        <Text
-                            style={styles.text}
-                        >
-                            Signup
-                        </Text>
+                    <View style={styles.button_box1}>
+                        <Button onPress={() => Actions.loginScreen()}>Login</Button>
                     </View>
+                    <View style={styles.button_box2}>
+                        <Button>Signup</Button>
+                    </View>
+                        {/*<Text*/}
+                            {/*style={styles.text}*/}
+                            {/*onPress={() => Actions.loginScreen()}*/}
+                        {/*>*/}
+                            {/*Login*/}
+                        {/*</Text>*/}
+
+                        {/*<Text*/}
+                            {/*style={styles.text}*/}
+                        {/*>*/}
+                            {/*Signup*/}
+                        {/*</Text>*/}
+
 
                 </View>
             </Image>
@@ -59,11 +66,27 @@ const styles = StyleSheet.create({
         width: 207,
     },
     image_box:{
-        flex: 7,
+        flex: 5,
+        padding: 50,
         justifyContent: 'space-around'
     },
-    button_box:{
-        flex: 2,
+    button_box1:{
+        flex: 1,
+        width: 250,
+        marginBottom: 5,
+        marginTop:100,
+        justifyContent: 'space-around',
+        alignItems: 'center'
+
+    },
+    button_box2:{
+        flex: 1,
+        width: 250,
+        marginBottom: 100,
+        marginTop:5,
+        justifyContent: 'space-around',
+        alignItems: 'center'
+
     },
     text: {
         fontSize: 20,

@@ -33,7 +33,7 @@ class App extends Component {
                     <Scene
                         key="loginScreen"
                         component={LoginScreen}
-                        hideNavBar={false}
+                        hideNavBar
                     />
                 </Router>
             </Provider>
