@@ -3,44 +3,64 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    LayoutAnimation
 } from 'react-native';
-import { Button } from '.././components/common/Button';
-import {Actions} from 'react-native-router-flux';
-
-
+import {connect} from 'react-redux'
+import { WelcomeButton } from '../components/common/WelcomeButton';
+import * as actions from '../actions'
 
 class WelcomeScreen extends Component {
-    state = { current_view: 'intro' }
+    componentWillUpdate(){
+        LayoutAnimation.spring()
+    }
+    renderContentArea() {
+        const {expanded_tab} = this.props;
+        if (expanded_tab == 'main') {
+            return (
+                <View>
+                    <View style={styles.button_box1}>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Login"/>
+                    </View>
+                    <View style={styles.button_box2}>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Signup"/>
+                    </View>
+                </View>
+            )
+        } else if (expanded_tab == 'login') {
+            return (
+                <View>
+                    <View style={styles.button_box1}>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Banana"/>
+                    </View>
+                    <View style={styles.button_box2}>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Phone"/>
+                    </View>
+                </View>
+            )
+        } else if (expanded_tab == 'signuo'){
+            return (
+                <View>
+                    <View style={styles.button_box1}>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="BananaPhone"/>
+                    </View>
+                    <View style={styles.button_box2}>
+                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="hello hello"/>
+                    </View>
+                </View>
+            )
+        }
+    }
     render() {
         return (
             <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
                 <View style={styles.container}>
-
-
                     <View style={styles.image_box}>
                         <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
                     </View>
-                    <View style={styles.button_box1}>
-                        <Button onPress={() => Actions.loginScreen()}>Login</Button>
+                    <View>
+                        {this.renderContentArea()}
                     </View>
-                    <View style={styles.button_box2}>
-                        <Button>Signup</Button>
-                    </View>
-                        {/*<Text*/}
-                            {/*style={styles.text}*/}
-                            {/*onPress={() => Actions.loginScreen()}*/}
-                        {/*>*/}
-                            {/*Login*/}
-                        {/*</Text>*/}
-
-                        {/*<Text*/}
-                            {/*style={styles.text}*/}
-                        {/*>*/}
-                            {/*Signup*/}
-                        {/*</Text>*/}
-
-
                 </View>
             </Image>
 
@@ -66,7 +86,7 @@ const styles = StyleSheet.create({
         width: 207,
     },
     image_box:{
-        flex: 5,
+        flex: 6,
         padding: 50,
         justifyContent: 'space-around'
     },
@@ -95,5 +115,9 @@ const styles = StyleSheet.create({
 
 });
 
-export default WelcomeScreen;
+const mapStateToProps = (state) => {
+   const expanded_tab = state.welcomeScreenCurrent
+    return {expanded_tab}
+}
+export default connect(mapStateToProps, actions)(WelcomeScreen)
 

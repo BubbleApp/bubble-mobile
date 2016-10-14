@@ -1,6 +1,6 @@
-export const selectLibrary = (libraryId) => {
+export const selectWelcomeScreen = (page) => {
   return {
-    type: 'select_library',
-    payload: libraryId
+    type: 'welcome_screen',
+    payload: page
   }
 }
