@@ -19,7 +19,6 @@ class WelcomeScreen extends Component {
     }
     renderContentArea() {
         const {expanded_tab} = this.props;
-        console.log(expanded_tab)
         if (expanded_tab == 'main') {
             return (
                 <InfoWelcomeComponent/>
@@ -33,7 +32,6 @@ class WelcomeScreen extends Component {
                 </View>
             )
         } else if (expanded_tab == 'signup') {
-            console.log('reached')
             return (
                 <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
                     <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
