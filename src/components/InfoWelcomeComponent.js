@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
-import {Alert, StyleSheet, View, Text, Image} from 'react-native';
+import {Alert, View, Text, Image} from 'react-native';
 import {connect} from 'react-redux'
 import AppIntro from 'react-native-app-intro';
 import * as actions from '../actions'
 
-class InfoWelcomeComponent extends Component {
-    exitAppIntroFlow = () => {
-        this.props.selectWelcomeScreen('signup')
-    }
-    render() {
+const InfoWelcomeComponent = (props) => {
         return (
             <AppIntro
-                onDoneBtnClick={this.exitAppIntroFlow}
-                onSkipBtnClick={this.exitAppIntroFlow}
+                onSkipBtnClick={() => props.selectWelcomeScreen('login_or_signup')}
                 showDoneButton={false}>
                 <View style={styles.slide}>
                     <Image style={styles.logo} source={require('../images/BubbleLogo.png')}/>
@@ -24,16 +19,16 @@ class InfoWelcomeComponent extends Component {
                     <View level={-10}>
                         <Text
                             style={styles.text}
-                            onPress={() => this.props.selectWelcomeScreen('signup')}>
+                            onPress={() => props.selectWelcomeScreen('login_or_signup')}>
                             Get started
                         </Text>
                     </View>
                 </View>
             </AppIntro>
         );
-    }
-}
-const styles = StyleSheet.create({
+};
+
+const styles = {
     slide: {
         flex: 1,
         flexDirection: 'column',
@@ -44,7 +39,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
-        textAlign:'center',
+        textAlign: 'center',
         fontSize: 30,
         fontWeight: 'bold',
     },
@@ -53,9 +48,10 @@ const styles = StyleSheet.create({
         height: 320,
         width: 207,
     }
+};
 
-});
 const mapStateToProps = (state) => {
     return state
 };
+
 export default connect(mapStateToProps, actions)(InfoWelcomeComponent)

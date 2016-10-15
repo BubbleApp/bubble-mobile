@@ -18,12 +18,26 @@ class WelcomeScreen extends Component {
         LayoutAnimation.spring()
     }
     renderContentArea() {
-        const {expanded_tab} = this.props;
-        if (expanded_tab == 'main') {
+        const {expanded_view} = this.props;
+        if (expanded_view == 'main') {
             return (
                 <InfoWelcomeComponent/>
             )
-        } else if (expanded_tab == 'login') {
+        } else if (expanded_view == 'login_or_signup') {
+            return (
+                <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+                    <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
+                    <View>
+                        <View>
+                            <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Login"/>
+                        </View>
+                        <View>
+                            <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Signup"/>
+                        </View>
+                    </View>
+                </Image>
+            )
+        } else if (expanded_view == 'login') {
             return (
                 <View>
                     <View>
@@ -31,7 +45,7 @@ class WelcomeScreen extends Component {
                     </View>
                 </View>
             )
-        } else if (expanded_tab == 'signup') {
+        } else if (expanded_view == 'signup') {
             return (
                 <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
                     <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
@@ -74,7 +88,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-   const expanded_tab = state.welcomeScreenCurrent
-    return {expanded_tab}
+   const expanded_view = state.welcomeScreenCurrent
+    return {expanded_view}
 }
 export default connect(mapStateToProps, actions)(WelcomeScreen)
