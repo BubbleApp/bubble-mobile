@@ -5,28 +5,14 @@ import AppIntro from 'react-native-app-intro';
 import * as actions from '../actions'
 
 class InfoWelcomeComponent extends Component {
-    onSkipBtnHandle = (index) => {
-        Alert.alert('Skip');
-        console.log(index);
-    }
-    doneBtnHandle = () => {
+    exitAppIntroFlow = () => {
         this.props.selectWelcomeScreen('signup')
     }
-    nextBtnHandle = (index) => {
-        Alert.alert('Next');
-        console.log(index);
-    }
-    onSlideChangeHandle = (index, total) => {
-        console.log(index, total);
-    }
-
     render() {
         return (
             <AppIntro
-                onNextBtnClick={this.nextBtnHandle}
-                onDoneBtnClick={this.doneBtnHandle}
-                onSkipBtnClick={this.onSkipBtnHandle}
-                onSlideChange={this.onSlideChangeHandle}
+                onDoneBtnClick={this.exitAppIntroFlow}
+                onSkipBtnClick={this.exitAppIntroFlow}
                 showDoneButton={false}>
                 <View style={styles.slide}>
                     <Image style={styles.logo} source={require('../images/BubbleLogo.png')}/>
