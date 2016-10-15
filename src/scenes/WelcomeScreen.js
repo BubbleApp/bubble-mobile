@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    LayoutAnimation
-} from 'react-native';
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  LayoutAnimation,
+  MapView,
+  Modal,
+} from 'react-native'
 import {connect} from 'react-redux'
-import { WelcomeButton } from '../components/common/WelcomeButton';
+import {WelcomeButton} from '../components/common/WelcomeButton';
+import InfoWelcomeComponent from '../components/InfoWelcomeComponent'
 import * as actions from '../actions'
 
 class WelcomeScreen extends Component {
@@ -16,12 +19,10 @@ class WelcomeScreen extends Component {
     }
     renderContentArea() {
         const {expanded_tab} = this.props;
+        console.log(expanded_tab)
         if (expanded_tab == 'main') {
             return (
-                <View>
-                    <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Login"/>
-                    <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Signup"/>
-                </View>
+                <InfoWelcomeComponent/>
             )
         } else if (expanded_tab == 'login') {
             return (
@@ -31,26 +32,28 @@ class WelcomeScreen extends Component {
                     </View>
                 </View>
             )
-        } else if (expanded_tab == 'signuo'){
+        } else if (expanded_tab == 'signup') {
+            console.log('reached')
             return (
-                <View>
-                    <View>
-                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="BananaPhone"/>
-                    </View>
-                    <View>
-                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="hello hello"/>
-                    </View>
-                </View>
+                <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+                    <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
+                        <View>
+                            <View>
+                                <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="BananaPhone"/>
+                            </View>
+                            <View>
+                                <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="hello hello"/>
+                            </View>
+                        </View>
+                </Image>
             )
         }
     }
     render() {
         return (
-            <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
-                <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
+            <View style={{'flex': 1}}>
                 {this.renderContentArea()}
-            </Image>
-
+            </View>
         );
     }
 }
