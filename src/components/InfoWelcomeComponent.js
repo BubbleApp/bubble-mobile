@@ -27,14 +27,21 @@ class InfoWelcomeComponent extends Component {
                 onDoneBtnClick={this.doneBtnHandle}
                 onSkipBtnClick={this.onSkipBtnHandle}
                 onSlideChange={this.onSlideChangeHandle}
-            >
+                showDoneButton={false}>
                 <View style={styles.slide}>
                     <Image style={styles.logo} source={require('../images/BubbleLogo.png')}/>
                 </View>
-                <View style={[styles.slide, {backgroundColor: '#a4b602'}]}>
-                    <View level={-10}><Text style={styles.text}>Page 2</Text></View>
-                    <View level={5}><Text style={styles.text}>Page 2</Text></View>
-                    <View level={20}><Text style={styles.text}>Page 2</Text></View>
+                <View style={styles.slide}>
+                    <View level={-10}><Text style={styles.text}>The new form of social media</Text></View>
+                </View>
+                <View style={styles.slide} >
+                    <View level={-10}>
+                        <Text
+                            style={styles.text}
+                            onPress={() => this.props.selectWelcomeScreen('signup')}>
+                            Get started
+                        </Text>
+                    </View>
                 </View>
             </AppIntro>
         );
@@ -51,6 +58,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
+        textAlign:'center',
         fontSize: 30,
         fontWeight: 'bold',
     },
