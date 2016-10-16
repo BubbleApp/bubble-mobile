@@ -9,8 +9,8 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import reducers from './reducers'
 
-import WelcomeScreen from './scenes/WelcomeScreen'
-import LoginScreen from './scenes/LoginScreen'
+import WelcomeInfo from './scenes/WelcomeInfo'
+import WelcomeOptions from './scenes/WelcomeOptions'
 
 
 class App extends Component {
@@ -20,19 +20,19 @@ class App extends Component {
         return true
         //run login code
     }
-    render(){
+    render () {
         return (
             <Provider store={createStore(reducers)}>
                 <Router>
                     <Scene
-                        key="welcomeScreen"
-                        component={WelcomeScreen}
+                        key="welcomeInfo"
+                        component={WelcomeInfo}
                         title="Bubble"
                         hideNavBar
                     />
                     <Scene
-                        key="loginScreen"
-                        component={LoginScreen}
+                        key="welcomeOptions"
+                        component={WelcomeOptions}
                         hideNavBar
                     />
                 </Router>

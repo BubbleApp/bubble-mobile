@@ -12,11 +12,9 @@ class LoginForm extends Component {
         return true
         //do login shit
     }
-
     onLoginFail() {
         this.setState({error: 'Authentication Failed', loading: false});
     }
-
     onLoginSuccess() {
         this.setState({
             email: '',
@@ -25,7 +23,6 @@ class LoginForm extends Component {
             error: ''
         });
     }
-
     renderButton() {
         if (this.state.loading) {
             return <Spinner size="small"/>;
@@ -36,7 +33,6 @@ class LoginForm extends Component {
             </Button>
         );
     }
-
     render() {
         return (
             <Card>

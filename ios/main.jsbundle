@@ -89476,7 +89476,7 @@ return state;}
 
 };
 }, "bubbleMobile/src/reducers/WelcomeScreenReducer.js");
-__d(742 /* bubbleMobile/src/scenes/WelcomeScreen.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(409 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(742 /* bubbleMobile/src/scenes/WelcomeInfo.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(409 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(12 /* react-native */);
 
 
@@ -89555,7 +89555,7 @@ var expanded_tab=state.welcomeScreenCurrent;
 return{expanded_tab:expanded_tab};
 };exports.default=
 (0,_reactRedux.connect)(mapStateToProps,actions)(WelcomeScreen);
-}, "bubbleMobile/src/scenes/WelcomeScreen.js");
+}, "bubbleMobile/src/scenes/WelcomeInfo.js");
 __d(743 /* bubbleMobile/src/components/common/WelcomeButton.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.WelcomeButton=undefined;var _react=require(409 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(12 /* react-native */);
 var _apslReactNativeButton=require(744 /* apsl-react-native-button */);var _apslReactNativeButton2=babelHelpers.interopRequireDefault(_apslReactNativeButton);

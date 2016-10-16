@@ -1,6 +1,6 @@
-export const selectWelcomeScreen = (page) => {
+export const selectWelcomeOption = (page) => {
   return {
-    type: 'welcome_screen',
+    type: 'welcome_option',
     payload: page
   }
 }

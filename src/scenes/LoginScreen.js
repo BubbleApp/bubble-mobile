@@ -5,12 +5,12 @@ import {
     View,
     Image
 } from 'react-native';
+
 import SvgUri from 'react-native-svg-uri';
 
 
 import {connect} from 'react-redux'
 
-import {Input} from './loginComponents/Input'
 import {WelcomeButton} from '../components/common/WelcomeButton';
 import {Spinner} from '../components/common/Spinner'
 
@@ -51,42 +51,6 @@ class LoginScreen extends Component {
     }
 
     renderContentArea() {
-        return(
-            <View style={styles.container}>
-                <View style={styles.text_input}>
-                    <SvgUri width="30" height="30" source={require('../images/userIcon.svg')} style={styles.image_style}/>
-                    <View style={styles.input_layout}>
-                        <Input placeholder='user@gmail.com'
-                               keyboardType={'email-address'}
-                               placeholderTextColor ='#DBDBDB'
-                               autoCorrect={false}
-                               //value={this.state.email}
-                               //onChangeText={email => this.setState({ email })}
-                        />
-                    </View>
-                </View>
-                <View style={styles.text_input}>
-                    <SvgUri width="30" height="30" source={require('../images/LockIcon.svg')} style={styles.image_style}/>
-                    <View style={styles.input_layout}>
-                        <Input placeholder='password'
-                               placeholderTextColor ='#DBDBDB'
-                               autoCorrect={false}
-                               secureTextEntry={true}
-                               //value={this.state.email}
-                               //onChangeText={password => this.setState({ password })}
-                        />
-                    </View>
-                </View>
-                <View>
-                    <Text style= {styles.forgot_password}>Forgot Password
-                    </Text>
-                </View>
-                <View>
-                    {this.renderButton()}
-                    <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login_or_signup')} title="Back"/>
-                </View>
-            </View>
-        )
     }
 
     render () {

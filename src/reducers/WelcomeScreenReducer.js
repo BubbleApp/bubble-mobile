@@ -1,7 +1,6 @@
-//main, login, signup
 export default (state = 'main', action) => {
     switch(action.type) {
-        case 'welcome_screen':
+        case 'welcome_option':
             return action.payload;
         default:
             return state;

@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {Alert, View, Text, Image} from 'react-native';
 import {connect} from 'react-redux'
 import AppIntro from 'react-native-app-intro';
+import {Actions} from 'react-native-router-flux'
 import * as actions from '../actions'
 
 const InfoWelcomeComponent = (props) => {
         return (
             <AppIntro
-                onSkipBtnClick={() => props.selectWelcomeScreen('login_or_signup')}
+                onSkipBtnClick={() => Actions.welcomeOptions()}
                 showDoneButton={false}>
                 <View style={styles.slide}>
                     <Image style={styles.logo} source={require('../images/BubbleLogo.png')}/>
@@ -19,7 +20,7 @@ const InfoWelcomeComponent = (props) => {
                     <View level={-10}>
                         <Text
                             style={styles.text}
-                            onPress={() => props.selectWelcomeScreen('login_or_signup')}>
+                            onPress={() => Actions.welcomeOptions()}>
                             Get started
                         </Text>
                     </View>
@@ -27,7 +28,6 @@ const InfoWelcomeComponent = (props) => {
             </AppIntro>
         );
 };
-
 const styles = {
     slide: {
         flex: 1,
