@@ -62,7 +62,7 @@ class WelcomeOptions extends Component {
                 small
                 title='Login'
                 backgroundColor="#fff"
-                buttonStyle={{borderRadius: 20, height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
+                buttonStyle={{height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
                 textStyle={{fontSize: 18, color: '#5E35B1', fontFamily:'Avenir-Heavy'}}
                 onPress={this.onLoginButtonPress.bind(this)}/>
         );
@@ -96,7 +96,7 @@ class WelcomeOptions extends Component {
                             small
                             title='Signup'
                             backgroundColor="#5E35B1"
-                            buttonStyle={{borderRadius: 20, height: 45}}
+                            buttonStyle={{height: 45}}
                             textStyle={{fontSize: 18, fontFamily:'Avenir-Heavy'}}
                             onPress={this.onSignupPress.bind(this)}/>
                     </View>
@@ -105,7 +105,7 @@ class WelcomeOptions extends Component {
                             small
                             title='Login'
                             backgroundColor="#fff"
-                            buttonStyle={{borderRadius: 20, height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
+                            buttonStyle={{height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
                             textStyle={{fontSize: 18, color: '#5E35B1', fontFamily:'Avenir-Heavy'}}
                             onPress={this.onLoginPress.bind(this)}/>
                     </View>
