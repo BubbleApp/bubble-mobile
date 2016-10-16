@@ -18,7 +18,6 @@ class WelcomeOptions extends Component {
     onSignUpButtonPress() {
         const {email, password} = this.state;
         this.setState({error: '', loading: true});
-        //DO SIGNUP STUFF
     }
 
     renderSignupButton() {
