@@ -15,10 +15,10 @@ const WelcomeButton = (props) => {
 
 const styles ={
     buttonStyle: {
-        width: 150,
+        width: 170,
         backgroundColor: '#44C1C4',
         borderColor: 'rgba(0,0,0,0)',
-        borderRadius: 30,
+        borderRadius: 5,
 
     },
     textStyle: {

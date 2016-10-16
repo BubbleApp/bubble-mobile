@@ -5,60 +5,140 @@ import {
     View,
     Image
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import SvgUri from 'react-native-svg-uri';
+
+
+import {connect} from 'react-redux'
 
 import {Input} from './loginComponents/Input'
+import {WelcomeButton} from '../components/common/WelcomeButton';
+import {Spinner} from '../components/common/Spinner'
 
-var UserImage = '../images/UserIcon.png'
+import * as actions from '../actions'
 
 
 
-const LoginScreen = () => {
-    return (
-        <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+class LoginScreen extends Component {
+    state = {email: '', password: '', error: '', loading: false};
+
+    onButtonPress() {
+        const {email, password} = this.state;
+        this.setState({error: '', loading: true});
+        return true
+        //do login shit
+    }
+
+    onLoginFail() {
+        this.setState({error: 'Authentication Failed', loading: false});
+    }
+
+    onLoginSuccess() {
+        this.setState({
+            email: '',
+            password: '',
+            loading: false,
+            error: ''
+        });
+    }
+
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner size="small"/>;
+        }
+        return (
+            <WelcomeButton onPress={this.onButtonPress.bind(this)} title="Login"/>
+        );
+    }
+
+    renderContentArea() {
+        return(
             <View style={styles.container}>
-                <View style={styles.image_box}>
-                    <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
+                <View style={styles.text_input}>
+                    <SvgUri width="30" height="30" source={require('../images/userIcon.svg')} style={styles.image_style}/>
+                    <View style={styles.input_layout}>
+                        <Input placeholder='user@gmail.com'
+                               keyboardType={'email-address'}
+                               placeholderTextColor ='#DBDBDB'
+                               autoCorrect={false}
+                               //value={this.state.email}
+                               //onChangeText={email => this.setState({ email })}
+                        />
+                    </View>
                 </View>
-                <Input label='Email:'
-                       placeholder='user@gmail.com'
-                       autoCorrect={false}
-                       imgSrc= {UserImage}
-                       //value={this.state.email}
-                       /*onChangeText={email => this.setState({ email })}*/>
-                </Input>
-
-
-
+                <View style={styles.text_input}>
+                    <SvgUri width="30" height="30" source={require('../images/LockIcon.svg')} style={styles.image_style}/>
+                    <View style={styles.input_layout}>
+                        <Input placeholder='password'
+                               placeholderTextColor ='#DBDBDB'
+                               autoCorrect={false}
+                               secureTextEntry={true}
+                               //value={this.state.email}
+                               //onChangeText={password => this.setState({ password })}
+                        />
+                    </View>
+                </View>
+                <View>
+                    <Text style= {styles.forgot_password}>Forgot Password
+                    </Text>
+                </View>
+                <View>
+                    {this.renderButton()}
+                    <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login_or_signup')} title="Back"/>
+                </View>
             </View>
-        </Image>
-    );
+        )
+    }
+
+    render () {
+        return (
+            <View style={{'flex': 1}}>
+                {this.renderContentArea()}
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop:65,
+        marginTop:40,
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-around',
-        alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0)',
+        alignItems: 'center',
+
     },
-    background: {
-        flex:1,
-        width: undefined,
-        height: undefined,
+    image_style: {
+        flex: 1 ,
+        flexDirection: 'column',
+        marginRight: 60
     },
-    logo: {
-        height: 320,
-        width: 207,
+    text_input: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-around',
+        marginBottom: 20,
     },
-    image_box:{
-        flex: 5,
-        padding: 50,
-        justifyContent: 'space-around'
+    input_layout: {
+        width:270
     },
+    forgot_password: {
+        fontSize:12,
+        color: '#fff',
+        marginBottom: 15
+
+    }
+
+
+
 });
 
-export default LoginScreen;
+const mapStateToProps = (state) => {
+    const expanded_tab = state.welcomeScreenCurrent
+    return {expanded_tab}
+}
+export default connect(mapStateToProps, actions)(LoginScreen)
+
+
 

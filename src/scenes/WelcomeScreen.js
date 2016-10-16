@@ -13,6 +13,8 @@ import {WelcomeButton} from '../components/common/WelcomeButton';
 import InfoWelcomeComponent from '../components/InfoWelcomeComponent'
 import * as actions from '../actions'
 
+import LoginScreen from './LoginScreen'
+
 class WelcomeScreen extends Component {
     componentWillUpdate(){
         LayoutAnimation.spring()
@@ -32,18 +34,22 @@ class WelcomeScreen extends Component {
                             <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Login"/>
                         </View>
                         <View>
-                            <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Signup"/>
+                            <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Sign Up"/>
                         </View>
                     </View>
                 </Image>
             )
         } else if (expanded_view == 'login') {
             return (
-                <View>
+                <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+                    <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
                     <View>
-                        <WelcomeButton onPress={() => this.props.selectWelcomeScreen('main')} title="Back"/>
+                        <LoginScreen/>
                     </View>
-                </View>
+
+                </Image>
+
+
             )
         } else if (expanded_view == 'signup') {
             return (
@@ -51,10 +57,10 @@ class WelcomeScreen extends Component {
                     <Image source={require('../images/BubbleLogo.png')} style={styles.logo} />
                         <View>
                             <View>
-                                <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="BananaPhone"/>
+                                <WelcomeButton onPress={() => this.props.selectWelcomeScreen('login')} title="Login"/>
                             </View>
                             <View>
-                                <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="hello hello"/>
+                                <WelcomeButton onPress={() => this.props.selectWelcomeScreen('signup')} title="Sign Up"/>
                             </View>
                         </View>
                 </Image>
@@ -83,6 +89,7 @@ const styles = StyleSheet.create({
     logo: {
         height: 320,
         width: 207,
+        marginTop: 20
     },
 
 });
