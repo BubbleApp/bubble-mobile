@@ -3,7 +3,8 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    fetch
 } from 'react-native';
 
 import SvgUri from 'react-native-svg-uri';
@@ -22,10 +23,7 @@ class LoginScreen extends Component {
     state = {email: '', password: '', error: '', loading: false};
 
     onButtonPress() {
-        const {email, password} = this.state;
-        this.setState({error: '', loading: true});
-        return true
-        //do login shit
+
     }
 
     onLoginFail() {

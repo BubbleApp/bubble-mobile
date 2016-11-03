@@ -6,13 +6,17 @@ import {
     Image,
     LayoutAnimation
 } from 'react-native';
+import axios from 'axios'
+
 import { FormLabel, FormInput } from 'react-native-elements'
 import {connect} from 'react-redux'
 import {Button} from 'react-native-elements'
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as actions from '../actions'
 
+
 class WelcomeOptions extends Component {
+
     state = {username: '', password: '', error: '', loading: false};
 
     onSignUpButtonPress() {
@@ -22,13 +26,13 @@ class WelcomeOptions extends Component {
 
     renderSignupButton() {
         return (
-                <Button
-                    small
-                    title='Signup'
-                    backgroundColor="#5E35B1"
-                    buttonStyle={{height: 45}}
-                    textStyle={{fontSize: 18, fontFamily:'Avenir-Heavy'}}
-                    onPress={this.onSignUpButtonPress.bind(this)}/>
+            <Button
+                small
+                title='Signup'
+                backgroundColor="#5E35B1"
+                buttonStyle={{height: 45}}
+                textStyle={{fontSize: 18, fontFamily:'Avenir-Heavy'}}
+                onPress={this.onSignUpButtonPress.bind(this)}/>
         );
     }
 
@@ -36,6 +40,17 @@ class WelcomeOptions extends Component {
         const {email, password} = this.state;
         this.setState({error: '', loading: true});
         //DO AUTH STUFF
+        console.log('worked');
+        axios.post('https://justinpezzack.ngrok.io/login', {
+            'username': this.state.username,
+            'password': this.state.password
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     onLoginFail() {
@@ -61,7 +76,7 @@ class WelcomeOptions extends Component {
                 small
                 title='Login'
                 backgroundColor="#fff"
-                buttonStyle={{height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
+                buttonStyle={{height: 45, borderWidth:2, borderColor:'#7D69AE', backgroundColor: 'rgba(0,0,0,0)', marginTop: 10}}
                 textStyle={{fontSize: 18, color: '#5E35B1', fontFamily:'Avenir-Heavy'}}
                 onPress={this.onLoginButtonPress.bind(this)}/>
         );
@@ -77,47 +92,53 @@ class WelcomeOptions extends Component {
         this.props.selectWelcomeOption('login')
     }
     renderHeaderArea() {
-        return (
-            <View style={{alignItems: 'center'}}>
-                <Image source={require('../images/BubbleName.png')} style={styles.logo}/>
-                <Text style={{fontSize: 22, fontFamily:'Avenir', marginTop: 10}}>Express Yourself</Text>
-                {this.renderSpinner()}
-            </View>
-        )
+        const {expanded_view} = this.props;
+        if (expanded_view == 'main') {
+            return (
+                <View style={styles.header}>
+                    <View style={{alignItems: 'center'}}>
+                        <Image source={require('../images/BubbleLogo.png')} style={styles.logo}/>
+                        {this.renderSpinner()}
+                    </View>
+                </View>
+            )
+        }
     }
+
+
     renderContentArea() {
         const {expanded_view} = this.props;
         if (expanded_view == 'main') {
             return (
-                <View>
                     <View>
-                        <Button
-                            small
-                            title='Signup'
-                            backgroundColor="#5E35B1"
-                            buttonStyle={{height: 45}}
-                            textStyle={{fontSize: 18, fontFamily:'Avenir-Heavy'}}
-                            onPress={this.onSignupPress.bind(this)}/>
+                        <View>
+                            <Button
+                                small
+                                title='Signup'
+                                backgroundColor="#5E35B1"
+                                buttonStyle={{height: 45}}
+                                textStyle={{fontSize: 18, fontFamily:'Avenir-Heavy'}}
+                                onPress={this.onSignupPress.bind(this)}/>
+                        </View>
+                        <View>
+                            <Button
+                                small
+                                title='Login'
+                                backgroundColor="rgba(0,0,0,0)"
+                                buttonStyle={{height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
+                                textStyle={{fontSize: 18, color: '#5E35B1', fontFamily:'Avenir-Heavy'}}
+                                onPress={this.onLoginPress.bind(this)}/>
+                        </View>
                     </View>
-                    <View>
-                        <Button
-                            small
-                            title='Login'
-                            backgroundColor="#fff"
-                            buttonStyle={{height: 45, borderWidth:2, borderColor:'#5E35B1', marginTop: 10}}
-                            textStyle={{fontSize: 18, color: '#5E35B1', fontFamily:'Avenir-Heavy'}}
-                            onPress={this.onLoginPress.bind(this)}/>
-                    </View>
-                </View>
             )
         } else if (expanded_view == 'login') {
             return (
                 <View>
-                    <View>
-                        <FormLabel>Username</FormLabel>
-                        <FormInput onChangeText={(data) => console.log(data)}/>
-                        <FormLabel>Password</FormLabel>
-                        <FormInput onChangeText={() => []}/>
+                    <View style={{marginTop: 50}}>
+                        <FormLabel labelStyle={styles.labelStyle}>Username</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={(data) => console.log(data)}/>
+                        <FormLabel labelStyle={styles.labelStyle}>Password</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={() => []}/>
                     </View>
                     <View style={{marginTop: 20}}>
                         {this.renderLoginButton()}
@@ -127,17 +148,17 @@ class WelcomeOptions extends Component {
         } else if (expanded_view == 'signup') {
             return (
                 <View>
-                    <View>
-                        <FormLabel>Name</FormLabel>
-                        <FormInput onChangeText={(data) => console.log(data)}/>
-                        <FormLabel>Username</FormLabel>
-                        <FormInput onChangeText={() => []}/>
-                        <FormLabel>Phone #</FormLabel>
-                        <FormInput onChangeText={() => []}/>
-                        <FormLabel>Email</FormLabel>
-                        <FormInput onChangeText={() => []}/>
-                        <FormLabel>Password</FormLabel>
-                        <FormInput onChangeText={() => []}/>
+                    <View style={{marginTop: 15}}>
+                        <FormLabel labelStyle={styles.labelStyle}>Name</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={(data) => console.log(data)}/>
+                        <FormLabel labelStyle={styles.labelStyle}>Username</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={() => []}/>
+                        <FormLabel labelStyle={styles.labelStyle}>Phone #</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={() => []}/>
+                        <FormLabel labelStyle={styles.labelStyle}>Email</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={() => []}/>
+                        <FormLabel labelStyle={styles.labelStyle}>Password</FormLabel>
+                        <FormInput inputStyle={styles.labelStyle} onChangeText={() => []}/>
                     </View>
                     <View style={{marginTop: 20}}>
                         {this.renderSignupButton()}
@@ -158,24 +179,29 @@ class WelcomeOptions extends Component {
         }
         return (
             <View style={page_style}>
-                <View style={styles.slideUp}>
-                    <View style={styles.header}>
-                        {this.renderHeaderArea()}
+                <Image source={require('../images/BackgroundGradient.png')} style={styles.background}>
+                    <View style={styles.slideUp}>
+                            {this.renderHeaderArea()}
+                        <View>
+                            {this.renderContentArea()}
+                        </View>
                     </View>
-                    <View>
-                        {this.renderContentArea()}
+                    <View style={styles.textBox}>
+                        <Text style={styles.text}>Made in Waterloo</Text>
                     </View>
-                </View>
-                <View style={styles.textBox}>
-                    <Text style={styles.text}>Made in Waterloo</Text>
-                </View>
+                </Image>
             </View>
         )
     }
 }
 
 const styles = {
-
+    background: {
+        flex:1,
+        width: undefined,
+        height: undefined,
+        backgroundColor: 'rgba(0,0,0,0)',
+    },
     header: {
         flexDirection: 'column',
         justifyContent: 'space-around',
@@ -184,7 +210,7 @@ const styles = {
         marginTop: 50
     },
     logo: {
-        height: 50,
+        height: 320,
         width: 207,
     },
     textBox: {
@@ -196,10 +222,14 @@ const styles = {
     text: {
         textAlign: 'center',
         fontFamily:'Avenir-Heavy',
-        color: '#9e9e9e',
+        color: '#fff',
     },
     slideUp : {
-        marginBottom: 75
+        marginBottom: 50
+    },
+    labelStyle: {
+        color: '#fff',
+        borderBottomColor: '#fff'
     }
 };
 
